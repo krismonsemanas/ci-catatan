@@ -1,0 +1,11 @@
+/* your styles go here */
+
+.nomor {
+    font-size: 1.2em;
+    font-weight: 300;
+}
+@media (max-width: 576px) {
+    .nomor {
+        font-size: .7em !important;
+    }
+}
