@@ -1,6 +1,11 @@
 <style>
     table {
         border-collapse: collapse;
+        display: flex;
+        justify-content: center;
+        margin-left: auto;
+        margin-right: auto;
+        width: 80%;
     }
     table .judul {
         background-color: #acacac;
@@ -13,30 +18,26 @@
         text-align: center;
     }
 </style>
-<h3>Laporan Keuangan Bulan Ini</h3>
+<h3>Laporan Keuangan Tahun Ini</h3>
 <table border="1">
     <thead>
         <tr class="judul">
             <th width="20"  style="text-align: center">#</th>
-            <th width="150">Keterangan</th>
-            <th width="200">Deskirpsi</th>
-            <th width="100">Nominal</th>
-            <th width="100">Status</th>
-            <th width="100">Tanggal</th>
+            <th width="150">Waktu</th>
+            <th width="200">Pemasukan</th>
+            <th width="200">Pengeluaran</th>
         </tr>
         </thead>
         <tbody>
             <?php
                 $no = 1;
-                foreach ($laporan as $item) {
+                foreach ($history as $item) {
                     ?>
                     <tr>
                         <td width="20" style="text-align: center"><?=$no++?></td>
-                        <td width="150"><?=$item->keterangan?></td>
-                        <td width="200"><?=$item->deskripsi?></td>
-                        <td width="100"><?=rupiah($item->nominal)?></td>
-                        <td width="100"><?=$item->status?></td>
-                        <td width="100"><?=tglInd($item->created_at)?></td>
+                        <td width="150"><?=$item->created_at?></td>
+                        <td width="200"><?=rupiah($item->pemasukan)?></td>
+                        <td width="200"><?=rupiah($item->pengeluaran)?></td>
                     </tr>
                     <?php
                 }

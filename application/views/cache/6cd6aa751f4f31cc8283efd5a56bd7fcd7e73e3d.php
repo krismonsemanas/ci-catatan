@@ -52,12 +52,6 @@
                                     <?php echo e(form_error('nominal','<div class="invalid-feedback">','</div>')); ?>
 
                                 </div>
-                                <div class="form-group">
-                                    <label for="hp">No Hp / Token</label>
-                                    <input type="text" name="hp" id="hp" value="<?php echo e($catatan->no_hp); ?>" class="form-control <?php if(form_error('hp')): ?> is-invalid <?php endif; ?> )">
-                                    <?php echo e(form_error('hp','<div class="invalid-feedback">','</div>')); ?>
-
-                                </div>
                                 <div class="form-group ">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control <?php if(form_error('status')): ?> is-invalid <?php endif; ?> )">

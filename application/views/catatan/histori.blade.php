@@ -1,28 +1,29 @@
-<?php $__env->startSection('content'); ?>
+@extends('template.layout')
+@section('content')
 <div class="breadcrumb-holder">
     <div class="container-fluid">
         <ul class="breadcrumb">
-            <li class="breadcrumb-item"><a href="<?php echo e(site_url()); ?>">Home</a></li>
-            <li class="breadcrumb-item active"><?php echo e($title); ?></li>
+            <li class="breadcrumb-item"><a href="{{site_url()}}">Home</a></li>
+            <li class="breadcrumb-item active">{{$title}}</li>
         </ul>
     </div>
 </div>
 <section>
     <div class="container-fluid">
         <header>
-            <h1 class="h3 display"><?php echo e($title); ?></h1>
+            <h1 class="h3 display">{{$title}}</h1>
         </header>
         <div class="row">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
                         <div class="pull-left">
-                            <h4>Data <?php echo e($title); ?></h4>
-                            <?php if(get_flashdata('success')): ?>
+                            <h4>Data {{$title}}</h4>
+                            @if (get_flashdata('success'))
                             <div class="success" data-message="<?=get_flashdata('success')?>"></div>
-                            <?php else: ?> 
+                            @else 
                             <div class="error" data-message="<?=get_flashdata('error')?>"></div>
-                            <?php endif; ?>
+                            @endif
                         </div>
                         <div class="pull-right">
                             <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i> Tambah</button>
@@ -34,30 +35,37 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Keterangan</th>
-                                        <th>Deskirpsi</th>
-                                        <th>Nominal</th>
-                                        <th>Status</th>
                                         <th>Tanggal</th>
-                                        <th><i class="fa fa-cogs"></i></th>
+                                        <th>Pengeluaran</th>
+                                        <th>Pemasukan</th>
                                     </tr>
                                     <tbody>
-                                        <?php $__currentLoopData = $catatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                       @if ($history != '')
+                                           @foreach ($history as $item)
+                                                <tr>
+                                                    <td>{{$loop->index+1}}</td>
+                                                    <td>{{$item->created_at}}</td>
+                                                    <td>{{rupiah($item->pengeluaran)}}</td>
+                                                    <td>{{rupiah($item->pemasukan)}}</td>
+                                                </tr>
+                                           @endforeach
+                                       @endif
+                                        {{-- @foreach ($catatan as $data)
                                             <tr>
-                                                <td><?php echo e($loop->index+1); ?></td>
-                                                <td><?php echo e($title); ?></td>
-                                                <td><?php echo e($data->deskripsi); ?></td>
-                                                <td><?php echo e(rupiah($data->nominal)); ?></td>
-                                                <td><div class="badge badge-info"><?php echo e($data->status); ?></td>
-                                                <td><?php echo e(tglInd($data->created_at)); ?></td>
+                                                <td>{{$loop->index+1}}</td>
+                                                <td>{{$title}}</td>
+                                                <td>{{$data->deskripsi}}</td>
+                                                <td>{{rupiah($data->nominal)}}</td>
+                                                <td><div class="badge badge-info">{{$data->status}}</td>
+                                                <td>{{tglInd($data->created_at)}}</td>
                                                 <td>
-                                                    <?php if($data->deskripsi != "Sisa saldo bulan lalu"): ?> 
-                                                    <a  href="<?php echo e(site_url('catatan/edit/'.$data->catatan_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                                    <a href="<?php echo e(site_url('catatan/hapus/'.$data->catatan_id.'/'.$data->keterangan_id)); ?>" name="<?php echo e($title); ?>" class="btn btn-danger btn-xs btn-hapus"><i class="fa fa-trash-o"></i> Hapus</a>
-                                                    <?php endif; ?>
+                                                    @if ($data->deskripsi != "Sisa saldo bulan lalu") 
+                                                    <a  href="{{site_url('catatan/edit/'.$data->catatan_id)}}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                                    <a href="{{site_url('catatan/hapus/'.$data->catatan_id.'/'.$data->keterangan_id)}}" name="{{$title}}" class="btn btn-danger btn-xs btn-hapus"><i class="fa fa-trash-o"></i> Hapus</a>
+                                                    @endif
                                                 </td>
                                              </tr>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        @endforeach --}}
                                     </tbody>
                                 </thead>
                             </table>
@@ -68,15 +76,15 @@
         </div>
     </div>
 </section>
-
+{{-- Modal --}}
 <div id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 id="exampleModalLabel" class="modal-title">Tambah <?php echo e($title); ?></h5>
+            <h5 id="exampleModalLabel" class="modal-title">Tambah {{$title}}</h5>
                 <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
             </div>
-            <form action="<?php echo e(site_url('catatan/proses')); ?>" method="post" class="text-left form-validate">
+            <form action="{{site_url('catatan/proses')}}" method="post" class="text-left form-validate">
                 <div class="modal-body">
                     <div class="form-group-material">
                         <input id="desc" type="text" name="desc" required class="input-material">
@@ -100,12 +108,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" data-dismiss="modal" class="btn btn-secondary">Close</button>
-                    <button type="submit" name="<?php echo e($title); ?>" class="btn btn-primary">Save</button>
+                    <button type="submit" name="{{$title}}" class="btn btn-primary">Save</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('template.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php /* E:\Coding\Web\ci-catatan\application\views/catatan/index.blade.php */ ?>
+@endsection

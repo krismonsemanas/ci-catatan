@@ -16,11 +16,8 @@
                 <li class="active"><a class="menu" href="<?php echo e(site_url()); ?>"> <i class="fa fa-home"></i>Home</a></li>
                 <li class=""><a class="menu" href="<?php echo e(site_url('catatan/masuk')); ?>"> <i class="fa fa-sign-in"></i>Pemasukan</a></li>
                 <li class=""><a class="menu" href="<?php echo e(site_url('catatan/keluar')); ?>"> <i class="fa fa-sign-out"></i>Pengeluaran</a></li>
-                <li class=""><a class="menu" href="#laporan"  aria-expanded="false" data-toggle="collapse"> <i class="fa fa-edit"></i>Laporan</a>
-                    <ul id="laporan" class="collapse list-unstyled ">
-                    <li><a href="<?php echo e(site_url('laporan')); ?>">To Pdf</a></li>
-                        <li><a href="#">To Excel</a></li>
-                    </ul>
+                <li  class=""><a class="menu" href="<?php echo e(site_url('catatan/histori')); ?>" ><i class="fa fa-bank"></i>Histori</a></li>
+                <li  class=""><a class="menu" href="<?php echo e(site_url('laporan')); ?>" ><i class="fa fa-file-pdf-o"></i>Laporan</a></li>
                 </li>
                 <li class=""><a href="<?php echo e(site_url('auth/logout')); ?>" class="text-danger btn-logout"> <i class="fa fa-sign-out"></i>Logout</a></li>
             </ul>

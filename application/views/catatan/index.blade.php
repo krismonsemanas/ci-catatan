@@ -38,7 +38,6 @@
                                         <th>Keterangan</th>
                                         <th>Deskirpsi</th>
                                         <th>Nominal</th>
-                                        <th>No Hp/Token</th>
                                         <th>Status</th>
                                         <th>Tanggal</th>
                                         <th><i class="fa fa-cogs"></i></th>
@@ -50,12 +49,13 @@
                                                 <td>{{$title}}</td>
                                                 <td>{{$data->deskripsi}}</td>
                                                 <td>{{rupiah($data->nominal)}}</td>
-                                                <td class="text-center">@if($data->no_hp == null) - @else {{$data->no_hp}} @endif</td>
                                                 <td><div class="badge badge-info">{{$data->status}}</td>
                                                 <td>{{tglInd($data->created_at)}}</td>
                                                 <td>
-                                                    <a href="{{site_url('catatan/edit/'.$data->catatan_id)}}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
+                                                    @if ($data->deskripsi != "Sisa saldo bulan lalu") 
+                                                    <a  href="{{site_url('catatan/edit/'.$data->catatan_id)}}" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
                                                     <a href="{{site_url('catatan/hapus/'.$data->catatan_id.'/'.$data->keterangan_id)}}" name="{{$title}}" class="btn btn-danger btn-xs btn-hapus"><i class="fa fa-trash-o"></i> Hapus</a>
+                                                    @endif
                                                 </td>
                                              </tr>
                                         @endforeach
@@ -86,11 +86,7 @@
                     <div class="form-group-material">
                         <input id="nominal" type="number" name="nominal" required  class="input-material">
                         <label for="nominal" class="label-material">Nominal</label>
-                    </div>        
-                    <div class="form-group-material">
-                        <input id="hp" type="text" name="hp" @if ($title == "Pengeluaran") required @endif class="input-material">
-                        <label for="hp" class="label-material">No Hp</label>
-                    </div>        
+                    </div>                
                     <div class="form-group">
                         <label for="" class="">Status</label>
                         <div class="i-checks">

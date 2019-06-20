@@ -12,6 +12,12 @@ class Catatan extends CI_Controller {
         $data['catatan'] = $this->catatan_model->showData($ketId);
         return view('catatan/index',$data);
     }
+    public function histori()
+    {
+        $data['title'] = "Histori";
+        $data['history'] = $this->catatan_model->getHistory()->result();
+        return view('catatan/histori',$data);
+    }
     public function keluar()
     {
         $data['title'] = "Pengeluaran";

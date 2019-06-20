@@ -25,4 +25,14 @@ class Laporan extends CI_Controller
         // $this->load->view('laporan/pdf',$data);
         laporanPdf($this->load->view('laporan/pdf',$data,true),$fileName);
     }
+    public function tahunan()
+    {
+        // laporanPdf();
+        $data = [
+            'history' => $this->catatan->getHistory()->result(),
+        ];
+        $fileName = "Laporan-".time().".pdf";
+        // $this->load->view('laporan/pdf',$data);
+        laporanPdf($this->load->view('laporan/tahunan',$data,true),$fileName);
+    }
 }

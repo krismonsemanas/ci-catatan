@@ -51,11 +51,6 @@
                                     <input type="number" name="nominal" id="nominal" value="{{$catatan->nominal}}" class="form-control @if(form_error('nominal')) is-invalid @endif )">
                                     {{form_error('nominal','<div class="invalid-feedback">','</div>')}}
                                 </div>
-                                <div class="form-group">
-                                    <label for="hp">No Hp / Token</label>
-                                    <input type="text" name="hp" id="hp" value="{{$catatan->no_hp}}" class="form-control @if(form_error('hp')) is-invalid @endif )">
-                                    {{form_error('hp','<div class="invalid-feedback">','</div>')}}
-                                </div>
                                 <div class="form-group ">
                                     <label for="status">Status</label>
                                     <select name="status" id="status" class="form-control @if(form_error('status')) is-invalid @endif )">

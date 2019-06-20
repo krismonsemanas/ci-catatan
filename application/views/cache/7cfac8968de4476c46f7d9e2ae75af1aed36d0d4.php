@@ -19,14 +19,17 @@
                             <?php echo e($title); ?> Bulan Ini
                         </div>
                         <div class="card-body">
-                        <a href="<?php echo e(site_url('laporan/pdf')); ?>" target="_blank" class="btn btn-primary"> <i class="fa fa-print"></i></a>
+                        <a href="<?php echo e(site_url('laporan/pdf')); ?>" title="Cetak" target="_blank" class="btn btn-primary btn-block"> <i class="fa fa-print"></i></a>
                         </div>
                     </div> 
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
-                            <?php echo e($title); ?> Dari sampai dengan
+                            <?php echo e($title); ?> Tahunan
+                        </div>
+                        <div class="card-body">
+                            <a href="<?php echo e(site_url('laporan/tahunan')); ?>" title="Cetak"  target="_blank" class="btn btn-primary btn-block"> <i class="fa fa-print"></i></a>
                         </div>
                     </div> 
                 </div>

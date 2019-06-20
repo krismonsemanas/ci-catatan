@@ -31,6 +31,7 @@ class Catatan_model extends CI_Model
             ])->result();
         }
         $this->db->join('keterangan','keterangan.id = catatan.keterangan_id');
+        // $this->db->select('catatan_id','keterangan_id','deskripsi','nominal','created_at');
         return $this->db->get('catatan')->result();
     }
     // update date
@@ -83,6 +84,10 @@ class Catatan_model extends CI_Model
     public function cekHistori()
     {
        return $this->db->get_where('history',['created_at' => date('Y-m')]);
+    }
+    public function getHistory(){
+        $this->db->like('created_at',date('Y'));
+        return $this->db->get('history');
     }
 }
 ?>

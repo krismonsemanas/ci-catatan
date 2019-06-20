@@ -34,30 +34,22 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Keterangan</th>
-                                        <th>Deskirpsi</th>
-                                        <th>Nominal</th>
-                                        <th>Status</th>
                                         <th>Tanggal</th>
-                                        <th><i class="fa fa-cogs"></i></th>
+                                        <th>Pengeluaran</th>
+                                        <th>Pemasukan</th>
                                     </tr>
                                     <tbody>
-                                        <?php $__currentLoopData = $catatan; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $data): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <tr>
-                                                <td><?php echo e($loop->index+1); ?></td>
-                                                <td><?php echo e($title); ?></td>
-                                                <td><?php echo e($data->deskripsi); ?></td>
-                                                <td><?php echo e(rupiah($data->nominal)); ?></td>
-                                                <td><div class="badge badge-info"><?php echo e($data->status); ?></td>
-                                                <td><?php echo e(tglInd($data->created_at)); ?></td>
-                                                <td>
-                                                    <?php if($data->deskripsi != "Sisa saldo bulan lalu"): ?> 
-                                                    <a  href="<?php echo e(site_url('catatan/edit/'.$data->catatan_id)); ?>" class="btn btn-info btn-xs"><i class="fa fa-edit"></i> Edit</a>
-                                                    <a href="<?php echo e(site_url('catatan/hapus/'.$data->catatan_id.'/'.$data->keterangan_id)); ?>" name="<?php echo e($title); ?>" class="btn btn-danger btn-xs btn-hapus"><i class="fa fa-trash-o"></i> Hapus</a>
-                                                    <?php endif; ?>
-                                                </td>
-                                             </tr>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                       <?php if($history != ''): ?>
+                                           <?php $__currentLoopData = $history; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                <tr>
+                                                    <td><?php echo e($loop->index+1); ?></td>
+                                                    <td><?php echo e($item->created_at); ?></td>
+                                                    <td><?php echo e(rupiah($item->pengeluaran)); ?></td>
+                                                    <td><?php echo e(rupiah($item->pemasukan)); ?></td>
+                                                </tr>
+                                           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                       <?php endif; ?>
+                                        
                                     </tbody>
                                 </thead>
                             </table>
@@ -108,4 +100,4 @@
 </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('template.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-<?php /* E:\Coding\Web\ci-catatan\application\views/catatan/index.blade.php */ ?>
+<?php /* E:\Coding\Web\ci-catatan\application\views/catatan/histori.blade.php */ ?>
